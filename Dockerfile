@@ -1,7 +1,6 @@
 ARG BASE_IMAGE=openjdk:11-slim
 FROM ${BASE_IMAGE}
-ARG GHIDRA_VERSION=9.0_PUBLIC_20190228
-ARG GHIDRA_SHA256=3b65d29024b9decdbb1148b12fe87bcb7f3a6a56ff38475f5dc9dd1cfc7fd6b2
+ARG GHIDRA_SHA256=1ce9bdf2d7f6bdfe5dccd06da828af31bc74acfd800f71ade021d5211e820d5e
 
 #Use tini to get rid of zombies from https://github.com/krallin/tini#using-tini
 ARG TINI_VERSION=v0.18.0
@@ -18,7 +17,7 @@ COPY --chown=ghidra:ghidra launch.sh.patch /tmp/
 
 WORKDIR /opt
 RUN apt-get update && apt-get install -y unzip wget gettext-base patch && \
-    wget -q -O ghidra.zip https://ghidra-sre.org/ghidra_${GHIDRA_VERSION}.zip && \
+    wget -q -O ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.0.4_build/ghidra_10.0.4_PUBLIC_20210928.zip && \
     echo "${GHIDRA_SHA256} *ghidra.zip" | sha256sum -c && \
     unzip ghidra.zip && \
     rm ghidra.zip && \
