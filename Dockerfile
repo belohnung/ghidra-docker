@@ -16,7 +16,7 @@ RUN useradd -m ghidra && \
 COPY --chown=ghidra:ghidra launch.sh.patch /tmp/
 
 WORKDIR /opt
-RUN apt-get update && apt-get install -y unzip wget gettext-base patch && \
+RUN apt-get update && apt-get install -y unzip wget gettext-base patch fontconfig && \
     wget -q -O ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.0.4_build/ghidra_10.0.4_PUBLIC_20210928.zip && \
     echo "${GHIDRA_SHA256} *ghidra.zip" | sha256sum -c && \
     unzip ghidra.zip && \
